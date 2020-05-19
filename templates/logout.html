@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form_container">
+    <div class="form_container__inner">
+        <p>You have successfully logged out.</p>
+        <p class="reminder"><a href="{{ url_for('login') }}">Log in again?</a></p>
+        <hr></hr>
+        <p class="reminder" style="padding: 12px 0"><a href="{{ url_for('index') }}"> << Return home</a></p>
+    </div>
+</div>
+{% endblock %}

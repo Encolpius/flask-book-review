@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form_container">
+    <div class="form_container__inner">
+        <p>Number of ratings: {{ book["books"][0]["ratings_count"] }}</p>
+        <p>Average Rating: {{ book["books"][0]["average_rating"] }}</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+<head>
+    <title>The CS50 Bookshelf</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="body_container">
+        {% block content %}{% endblock %}
+    </div>
+</body>

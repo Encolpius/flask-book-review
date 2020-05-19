@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form_container">
+    <div class="form_container__inner">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="welcome">
+            <h3>Welcome to the <span style="color: green">cs50 digital bookshelf</span></h3>
+            <h4>Create a new account:</h4>
+        </div>
+        <form id="signup_form" action="{{ url_for('signup') }}" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input id="form_submit" type="submit">
+        </form>
+        <p class="reminder">Already got an account? <a class="reminder-link" href="{{ url_for('login') }}">Log in!</a></p>
+        <p class="reminder" style="padding: 12px 0"><a href="{{ url_for('index') }}"><< Return home</a></p>
+    </div>
+</div>
+{% endblock %}
