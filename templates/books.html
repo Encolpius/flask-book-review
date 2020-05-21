@@ -1,10 +1,59 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="form_container">
-    <div class="form_container__inner">
-        <p>Number of ratings: {{ book["books"][0]["ratings_count"] }}</p>
-        <p>Average Rating: {{ book["books"][0]["average_rating"] }}</p>
+<div class="book_container">
+    <div class="book_container__inner">
+        <p class="reminder" style="margin-bottom: 25px;">
+            <a class="book-reminder" href="{{ url_for('home') }}"> << Return home</a>
+        </p>
+        <div class="book-information-container">
+            <div class="cover-img-container">
+                <div class="cover-img">
+                    <img src='https://covers.openlibrary.org/b/ISBN/{{ book.isbn }}-M.jpg' width="225px" height="300px" />
+                </div>
+            </div>
+            <div class="book-info">
+                <h3 class="book-title"><strong>{{ book.title }}</strong></h3>
+                <table>
+                    <tr>
+                        <td>Author: </td>
+                        <td>{{ book.author }}</td>
+                    </tr>
+                    <tr>
+                        <td>Year Published: </td>
+                        <td>{{ book.year }}</td>
+                    </tr>
+                    <tr>
+                        <td>ISBN: </td>
+                        <td>{{ book.isbn }}</td>
+                    </tr>
+                    <tr>
+                        <td>Number of Ratings: </td>
+                        <td>{{ request["books"][0]["ratings_count"] }}</td>
+                    </tr>
+                    <tr>
+                        <td>Average Rating: </td>
+                        <td>{{ request["books"][0]["average_rating"] }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="reviews-container">
+            <h4>User Reviews:</h4>
+            <hr>
+            <div class="review">
+                <p class="review-name">User Name here</p>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                    nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+            <div class="review">
+                <p class="review-name">User Name here</p>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                    nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

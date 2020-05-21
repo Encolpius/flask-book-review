@@ -111,7 +111,7 @@ def books(title):
         }
     res = requests.get(url, params=params).json()
     if request.method == 'GET':
-        return render_template('books.html', book=res)
+        return render_template('books.html', book=book, request=res)
 
 
 def find_book_info(search_request):

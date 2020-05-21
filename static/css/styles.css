@@ -100,6 +100,7 @@ input {
 }
 
 
+
 /*
 ======================
 SEARCH LIST CONTAINER
@@ -117,10 +118,99 @@ hr {
     margin-left: 0;
 }
 
+.reviews-container hr {
+    width: 100%;
+}
+
 .book__searchResult {
     margin: 12px 0;
 }
 
+
+/*
+======================
+BOOKS PAGE
+======================
+*/
+
+.book_container {
+    height: 100%;
+    padding: 32px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 120px;
+}
+
+.book_container__inner {
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    padding: 30px;
+    border-radius: 10px;
+    width: 75%;
+    margin-bottom: 120px;
+    min-width: 533px;
+}
+
+.book-information-container {
+    padding-top: 12px;
+    display: flex;
+}
+
+.book-info {
+    padding: 8px;
+    margin-left: 20px;
+}
+
+.cover-img-container {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cover-img {
+    border: 1px solid #ccc;
+    height: 300px;
+    width: 225px;
+}
+
+table {
+    font-family: "Rubik", serif;
+}
+
+td {
+    padding: 4px;
+}
+
+table td:nth-child(1) {
+    font-weight: 700;
+}
+
+table td:nth-child(2) {
+    padding-left: 12px
+}
+
+.reviews-container {
+    margin-top: 30px;
+    font-family: "Lato", sans-serif;
+}
+
+.book-title {
+    padding: 4px;
+}
+
+.review {
+    padding: 3px 0;
+    margin: 20px 0;
+    line-height: 19px;
+}
+
+.review-name {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
 
 /*
 ======================
@@ -254,6 +344,9 @@ h5 {
     color: #9b9b9b
 }
 
+strong {
+    font-weight: 700;
+};
 
 /*
 ======================
@@ -261,24 +354,44 @@ ANCHORS
 ======================
 */
 
-a {
-    text-decoration: none;
-    color: black;
-}
-
-.reminder {
-    color: red;
-}
 
 .reminder-link {
     color: red;
-    text-decoration: underline;
 }
 
 .reminder-link:hover {
     color: #8B0000;
 }
 
+.book-reminder {
+    margin-bottom: 18px;
+    text-decoration: none;
+}
+
 input {
     font-family: "Lato", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+/*
+======================
+MEDIA QUERIES
+======================
+*/
+
+@media (max-width: 910px) {
+    .book-information-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .book-title {
+        text-align: center;
+    }
 }
