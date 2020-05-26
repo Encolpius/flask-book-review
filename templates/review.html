@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form_container">
+    <div class="form_container__inner">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="welcome">
+            <h4>Write your review of "{{ title }}" below.</h4>
+        </div>
+        <form id="review_form" action="{{ url_for('login') }}" method="post">
+            <textarea name="review_text" ></textarea>
+            <input id="form_submit" type="submit">
+        </form>
+        <p class="reminder" style="padding: 12px 0"><a href="{{ url_for('books', title=title) }}"> << Return to book page</a></p>
+    </div>
+</div>
+{% endblock %}

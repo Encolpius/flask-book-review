@@ -1,13 +1,14 @@
 import os, requests
 
 from flask import Flask, flash, redirect, session, render_template, url_for, request, json
-from flask_login import current_user
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from passlib.hash import sha256_crypt
 
 app = Flask(__name__)
+
+
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -22,21 +23,23 @@ Session(app)
 engine = create_engine(os.getenv('DATABASE_URL'))
 db = scoped_session(sessionmaker(bind=engine))
 
-# Set up Goodreads API
-
 
 @app.route('/',  methods=['GET', 'POST'])
 def index():
     if 'logged_in' in session:
         return redirect(url_for('home'))
+    if request.method == 'POST':
+        flash("You must be logged in to do that.", "message-error")
+        return render_template('login.html')
     else:
-        return render_template('index.html')
+        isbns = db.execute("SELECT isbn FROM books ORDER BY random() LIMIT 4")
+        return render_template('index.html', isbns=isbns)
 
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    if session['logged_in'] != True:
-            flash('You must be logged in to search.', 'message-error')
+    if 'logged_in' not in session:
+            flash('Please log in.', 'message-error')
             return redirect(url_for("login"))
     username = session['username']
     if request.method == "POST":
@@ -103,7 +106,12 @@ def logout():
 
 @app.route('/book/<title>', methods=['GET', 'POST'])
 def books(title):
+    if 'logged_in' not in session:
+        flash('Please log in.', 'message-error')
+        return redirect(url_for("login"))
+
     book = db.execute('SELECT * FROM books WHERE title LIKE :title', {'title': title}).first()
+    reviews = db.execute('SELECT * FROM reviews WHERE book LiKE :title', {'title': title}).fetchall()
     url = "https://www.goodreads.com/book/review_counts.json"
     params = {
         "key": "q63Wwt9QwstBB6Ju3KtJ2g",
@@ -111,7 +119,13 @@ def books(title):
         }
     res = requests.get(url, params=params).json()
     if request.method == 'GET':
-        return render_template('books.html', book=book, request=res)
+        return render_template('books.html', book=book, request=res, reviews=reviews)
+
+
+@app.route('/review/<title>', methods=['GET', 'POST'])
+def review(title):
+    if request.method == 'POST':
+        return render_template('review.html', title=title)
 
 
 def find_book_info(search_request):

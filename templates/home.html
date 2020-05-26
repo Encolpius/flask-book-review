@@ -35,18 +35,21 @@
                 </div>
             </form>
         </div>
+        <div class="homepage__image">
+
+        </div>
     </div>
     <div id="searchContainer">
         {% if message %}
         <h4>{{ message }}</h4>
         {% endif %}
         {% if books %}
-            <h3>Search Results:</h3>
+            <h4 style="font-weight: 700">Search Results</h4>
+            <h5>Click on a title for more information.</h5>
             {% for book in books %}
             <div class="book__searchResult">
                 <h4><a href="{{ url_for('books', title=book.title) }}">{{ book.title }}</a> - by {{ book.author }}</h4>
                 <h5>Published in {{ book.year }}, ISBN: {{ book.isbn }}</h5>
-                <hr>
             </div>
             {% endfor %}
         {% endif %}

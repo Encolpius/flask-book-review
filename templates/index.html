@@ -28,7 +28,7 @@
         <div id="homepage__headline">
             <h1>Find your next <span style="color: green">favorite</span> book</h1>
             <h3>Get started below and search our huge collection of titles and reviews.</h3>
-            <form action="{{ url_for('home') }}" method="post">
+            <form action="{{ url_for('index') }}" method="post">
                 <input id="user_search" name="userSearchInput" type="text" placeholder="Title, author, or ISBN">
                 <div class="submitContainer">
                     <input id="user_search_submit" type="submit">
@@ -36,7 +36,11 @@
             </form>
         </div>
         <div class="homepage__image">
-
+            <div class="images-container">
+                {% for isbn in isbns %}
+                <img src='https://covers.openlibrary.org/b/ISBN/{{ isbn[0] }}-M.jpg' width="225px" height="300px" />
+                {% endfor %}
+            </div>
         </div>
     </div>
 </section>

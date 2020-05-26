@@ -39,20 +39,17 @@
             </div>
         </div>
         <div class="reviews-container">
-            <h4>User Reviews:</h4>
+            <form action="{{ url_for('review', title=book.title) }}" method="post">
+                <button class="review-button">Write a Review</button>
+            </form>
             <hr>
+            {% for review in reviews %}
             <div class="review">
-                <p class="review-name">User Name here</p>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                    nisi ut aliquip ex ea commodo consequat.</p>
+                <p class="review-name">{{ review.author }}</p>
+                <p>{{ review.review_text }}</p>
+                <p class="review-date"><small>{{ review.date }}</small></p>
             </div>
-            <div class="review">
-                <p class="review-name">User Name here</p>
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                    nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
