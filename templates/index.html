@@ -14,7 +14,6 @@
     <div class="nav_containerContent">
         <ul id="topNav_noLogin">
             <li class="logo">the cs50 digital bookshelf</li>
-            <li>about</li>
             {% if not session.logged_in %}
                 <li><a href="{{ url_for('login') }}">log in</a></li>
             {% else %}

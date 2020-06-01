@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block head %}
+    {% block title %}<title>{{ book.title }}</title>{% endblock %}
+{% endblock %}
+
+
 {% block content %}
 <div class="book_container">
     <div class="book_container__inner">
@@ -28,26 +33,37 @@
                         <td>{{ book.isbn }}</td>
                     </tr>
                     <tr>
-                        <td>Number of Ratings: </td>
-                        <td>{{ request["books"][0]["ratings_count"] }}</td>
+                        <td>Rating Average: </td>
+                        <td>{{ ratings }}</td>
                     </tr>
                     <tr>
-                        <td>Average Rating: </td>
-                        <td>{{ request["books"][0]["average_rating"] }}</td>
+                        <td>Number of Ratings: </td>
+                        <td>{{ reviews|length }}</td>
                     </tr>
                 </table>
+                <div class="goodreads-container">
+                    <table>
+                        <tr>
+                            <td>Goodreads Rating: </td>
+                            <td>{{ request["books"][0]["average_rating"] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Reviews: </td>
+                            <td>{{ request["books"][0]["ratings_count"] }}</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="reviews-container">
-            <form action="{{ url_for('review', title=book.title) }}" method="post">
-                <button class="review-button">Write a Review</button>
-            </form>
+            <form action="{{ url_for('review', title=book.title) }}" method="get">
+                {{ review_markup }}
             <hr>
             {% for review in reviews %}
             <div class="review">
                 <p class="review-name">{{ review.author }}</p>
                 <p>{{ review.review_text }}</p>
-                <p class="review-date"><small>{{ review.date }}</small></p>
+                <p class="review-date"><small>{{ review.date.strftime('%m-%d-%Y') }}</small></p>
             </div>
             {% endfor %}
         </div>

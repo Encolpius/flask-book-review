@@ -82,8 +82,11 @@ HOMEPAGE
 }
 
 .images-container {
-    width: 70%;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 12px;
 }
 
 .images-container img {
@@ -252,6 +255,14 @@ table td:nth-child(2) {
     background-color: #E7C799;
 }
 
+.goodreads-container {
+    border: 1px solid #ccc;
+    background-color: #D0F0C0;
+    margin-top: 25px;
+    padding: 22px;
+    font-weight: 400;
+}
+
 /*
 ======================
 SIGNUP, LOGIN, LOGOUT
@@ -290,6 +301,11 @@ SIGNUP, LOGIN, LOGOUT
 #review_form textarea {
     margin-bottom: 8px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+select {
+    font-family: "Rubik", serif;
+    margin-bottom: 8px;
 }
 
 #review_form textarea {
@@ -430,11 +446,35 @@ a {
 
 /*
 ======================
+404 PAGE
+======================
+*/
+
+.not_found > * {
+    margin: 12px;
+}
+
+
+/*
+======================
 MEDIA QUERIES
 ======================
 */
 
-@media (max-width: 910px) {
+@media (max-width: 1214px) {
+    .submitContainer {
+        padding: 0px;
+        margin-top: 12px;
+        width: 100%;
+    }
+
+    #user_search {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 990px) {
     .book-information-container {
         display: flex;
         flex-direction: column;
@@ -442,6 +482,58 @@ MEDIA QUERIES
         justify-content: center;
     }
     .book-title {
+        text-align: center;
+    }
+
+    #homepage_hero {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0px;
+        padding-top: 35px;
+        margin-top: 30px;
+    }
+
+    #homepage__headline {
+        width: 60%;
+        margin: 0 auto;
+        margin-top: 25px;
+    }
+
+    .book_container__inner {
+        min-width: initial;
+        width: 90%;
+    }
+
+    .images-container {
+        margin-top: 25px;
+    }
+
+    .images-container img {
+        width: 225px;
+        height: 300px;
+    }
+
+    #topNav_noLogin {
+        flex-direction: column;
+    }
+
+    nav ul {
+        justify-content: start
+    }
+
+    nav ul li {
+        padding: 0px;
+        margin: 12px;
+    }
+
+    nav ul li:first-child {
+        padding-left: 0px;
+    }
+
+    .logo {
+        padding: 0px;
+        width: 100%;
+        font-size: 22px;
         text-align: center;
     }
 }

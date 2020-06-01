@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block head %}
+    {% block title %}<title>{{ title }}</title>{% endblock %}
+{% endblock %}
+
 {% block content %}
 <div class="form_container">
     <div class="form_container__inner">
@@ -11,10 +15,19 @@
             {% endif %}
         {% endwith %}
         <div class="welcome">
-            <h4>Write your review of "{{ title }}" below.</h4>
+            <h4>{{ title }}</h4>
+            <h5>Write your review below.</h5>
         </div>
-        <form id="review_form" action="{{ url_for('login') }}" method="post">
-            <textarea name="review_text" ></textarea>
+        <form id="review_form" action="{{ url_for('review', title=title) }}" method="post">
+            <label for="rating">Rate the book:</label>
+            <select name="rating" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <textarea name="review_text" required></textarea>
             <input id="form_submit" type="submit">
         </form>
         <p class="reminder" style="padding: 12px 0"><a href="{{ url_for('books', title=title) }}"> << Return to book page</a></p>
