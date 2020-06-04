@@ -41,11 +41,20 @@ def home():
             return redirect(url_for("login"))
     if request.method == "POST":
         search_request = request.form['userSearchInput']
-        book_info = find_book_info(search_request)
+        searchField = request.form['searchField']
+        if search_request.isspace() or search_request == "":
+            flash('No characters detected.', 'message-error')
+            return redirect(url_for('home'))
+        if searchField == "title":
+            book_info = find_book_title(search_request)
+        elif searchField == "author":
+            book_info = find_book_author(search_request)
+        else:
+            book_info = find_book_isbn(search_request)
         if len(book_info) < 1:
             return render_template('home.html', 
                                     message='No results found. Please try again.', 
-                                    username=username)
+                                    username=session.get("username"))
         else:
             return render_template('home.html', books=book_info)
     else:
@@ -178,17 +187,24 @@ def get_api(isbn):
 def not_found_error(error):
     return render_template('404.html'), 404
 
-def find_book_info(search_request):
-    results = db.execute('SELECT * FROM books WHERE title LIKE :title OR author LIKE :author OR isbn LIKE :isbn',
-                        {'title': '%' + search_request + '%',
-                         'author': '%' + search_request + "%",
-                         'isbn': '%' + search_request + "%"
-                        }).fetchall()
-    db.commit()
+def find_book_title(search_request):
+    results = db.execute('SELECT * FROM books WHERE LOWER(title) LIKE LOWER(:title)',
+                        {'title': '%' + search_request + '%'}).fetchall()
+    return results
+
+def find_book_author(search_request):
+    results = db.execute('SELECT * FROM books WHERE LOWER(author) LIKE LOWER(:author)',
+                        {'author': '%' + search_request + '%'}).fetchall()
+    return results
+
+def find_book_isbn(search_request):
+    results = db.execute('SELECT * FROM books WHERE isbn like :isbn',
+                        {'isbn': search_request}).fetchall()
     return results
 
 def check_for_review(username, title):
     authors = db.execute("SELECT author FROM reviews WHERE book = :title", {"title": title}).fetchall()
+    db.commit()
     for author in authors:
         if username == author.author:
             return True 

@@ -2,15 +2,6 @@
 
 {% block content %}
 <nav>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="{{ category }}">
-                <p>{{ message }}</p>
-            </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
     <div class="nav_containerContent">
         <ul id="topNav_noLogin">
             <li class="logo">the cs50 digital bookshelf</li>
@@ -32,7 +23,27 @@
                 <div class="submitContainer">
                     <input id="user_search_submit" type="submit">
                 </div>
+                <div class="radios clearfix">
+                    <div class="radio-div">
+                        <input type="radio" id="title" name="searchField" value="title" required>Title</input>
+                    </div>
+                    <div class="radio-div">
+                        <input type="radio" id="author" name="searchField" value="author">Author</input>
+                    </div>
+                    <div class="radio-div">
+                        <input type="radio" id="isbn" name="searchField" value="isbn">ISBN</input>
+                    </div>
+                </div>
             </form>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="{{ category }} spacing-error">
+                    <p>{{ message }}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         </div>
         <div class="homepage__image">
 

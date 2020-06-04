@@ -120,6 +120,21 @@ input {
     outline: none;
 }
 
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+.radio-div {
+    float: left;
+    margin-right: 12px;
+}
+
+.radios {
+    margin: 6px 0;
+    font-family: "Lato", sans-serif;
+}
 
 
 /*
@@ -361,6 +376,11 @@ MESSAGES
 .message-error {
     color: red;
     font-family: "Rubik", serif;
+}
+
+.spacing-error {
+    padding: 5px 0;
+    margin: 12px 0;
 }
 
 .signup_container ul {
