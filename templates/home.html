@@ -2,6 +2,15 @@
 
 {% block content %}
 <nav>
+    {% with messages = get_flashed_messages(category_filter=["message-success"]) %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message-success">
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div class="nav_containerContent">
         <ul id="topNav_noLogin">
             <li class="logo">the cs50 digital bookshelf</li>
@@ -35,15 +44,15 @@
                     </div>
                 </div>
             </form>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                <div class="{{ category }} spacing-error">
-                    <p>{{ message }}</p>
-                </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+            {% with messages = get_flashed_messages(category_filter=["message-error"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="spacing-error">
+                        <p>{{ message }}</p>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         </div>
         <div class="homepage__image">
 

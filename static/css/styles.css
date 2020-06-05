@@ -381,6 +381,7 @@ MESSAGES
 .spacing-error {
     padding: 5px 0;
     margin: 12px 0;
+    color: red;
 }
 
 .signup_container ul {

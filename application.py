@@ -84,7 +84,7 @@ def signup():
             session['username'] = username
             session['firstname'] = firstname
             session['logged_in'] = True
-            flash('Account successfully created!', 'message-success')
+            flash('Your account has been created. Welcome to the CS50 Digital Bookshelf!', 'message-success')
             return redirect(url_for('home'))
         elif username == username_in_db.username:
             flash('Error: Username already taken. Please choose another.', 'message-error')
