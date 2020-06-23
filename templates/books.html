@@ -58,6 +58,7 @@
         <div class="reviews-container">
             <form action="{{ url_for('review', title=book.title) }}" method="get">
                 {{ review_markup }}
+            </form>
             <hr>
             {% for review in reviews %}
             <div class="review">
