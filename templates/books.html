@@ -61,7 +61,7 @@
             <hr>
             {% for review in reviews %}
             <div class="review">
-                <p class="review-name">{{ review.author }}</p>
+                <p style="margin-bottom: 6px"><span class="review-name">{{ review.author }}</span> - {{ review.rating }} stars</p>
                 <p>{{ review.review_text }}</p>
                 <p class="review-date"><small>{{ review.date.strftime('%m-%d-%Y') }}</small></p>
             </div>

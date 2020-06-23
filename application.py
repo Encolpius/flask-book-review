@@ -127,9 +127,7 @@ def books(title):
         flash('Please log in.', 'message-error')
         return redirect(url_for("login"))
     book = db.execute('SELECT * FROM books WHERE title LIKE :title', {'title': title}).first()
-    db.commit()
     reviews = db.execute('SELECT * FROM reviews WHERE book LIKE :title', {'title': title}).fetchall()
-    db.commit()
     rating_data = db.execute('SELECT rating FROM reviews WHERE book LIKE :title', {'title': title}).fetchall()
     db.commit()
     ratings = []
@@ -174,14 +172,25 @@ def review(title):
 @app.route('/api/<isbn>', methods=['GET'])
 def get_api(isbn):
     book = db.execute('SELECT * FROM books WHERE isbn LIKE :isbn', {'isbn': isbn}).first()
+    reviews = db.execute('SELECT * FROM reviews WHERE book LIKE :title', {'title': book.title}).fetchall()
+    rating_data = db.execute('SELECT rating FROM reviews WHERE book LIKE :title', {'title': book.title}).fetchall()
     db.commit()
+    ratings = []
+    if len(rating_data) > 0:
+        for rating in rating_data:
+            ratings.append(rating[0]) 
+        ratings = mean(ratings)
+    else:
+        ratings = 0
     if book == None:
         return abort(404)
     else:
         return jsonify(title=book.title,
                        author=book.author,
                        year=book.year,
-                       isbn=book.isbn)
+                       isbn=book.isbn,
+                       review_count=len(reviews),
+                       average_score=ratings)
 
 @app.errorhandler(404)
 def not_found_error(error):
